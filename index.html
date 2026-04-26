@@ -5,13 +5,695 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="BetWin Pro - Smart betting tracker and profit calculator. Track bets, build betslips, and compound winnings to 1M TZS.">
     <meta name="keywords" content="betting calculator, bet tracker, betslip builder, Tanzania betting, profit calculator">
-    <meta name="author" content="BetWin Pro">
     <meta property="og:title" content="BetWin Pro - Smart Betting Tracker">
-    <meta property="og:description" content="Track, bet, and win. Compound your way to 1 Million TZS with our smart betting calculator.">
-    <meta property="og:type" content="website">
+    <meta property="og:description" content="Track, bet, and win. Compound your way to 1 Million TZS.">
     <title>BetWin Pro - Smart Betting Tracker & Calculator</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <style>
+        /* =========================================== */
+        /* RESET STYLES */
+        /* =========================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* =========================================== */
+        /* BODY STYLES */
+        /* =========================================== */
+        body {
+            background-color: #ff9d2b;
+            color: #333;
+            max-width: 1000px;
+            margin: 0 auto;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* =========================================== */
+        /* HEADER STYLES */
+        /* =========================================== */
+        header {
+            background: linear-gradient(135deg, #ffdc2b, #ff5f2b);
+            color: green;
+            padding: 20px;
+            border-radius: 0 0 12px 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+
+        .header-left {
+            flex: 1;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: green;
+        }
+
+        /* =========================================== */
+        /* PROFILE DROPDOWN */
+        /* =========================================== */
+        .profile-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .profile-btn {
+            background-color: transparent;
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .profile-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        #profile-icon {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #3498db;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid rgba(255, 255, 255, 0.5);
+        }
+
+        #profile-icon i {
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 60px;
+            background-color: white;
+            min-width: 280px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+            border-radius: 10px;
+            z-index: 1000;
+            border: 1px solid #ddd;
+            overflow: hidden;
+        }
+
+        .dropdown-content.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .dropdown-header {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            gap: 15px;
+        }
+
+        #dropdown-profile-pic {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: #3498db;
+            overflow: hidden;
+            border: 3px solid white;
+        }
+
+        #dropdown-username {
+            display: block;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        #dropdown-email {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        .dropdown-divider {
+            height: 1px;
+            background-color: #eee;
+            margin: 0;
+        }
+
+        .dropdown-content a {
+            color: #333;
+            padding: 14px 20px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.2s;
+            border-bottom: 1px solid #f5f5f5;
+            cursor: pointer;
+        }
+
+        .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f8fbff;
+            color: #3498db;
+            padding-left: 25px;
+        }
+
+        .dropdown-content a i {
+            width: 20px;
+            text-align: center;
+            color: #3498db;
+            font-size: 1.1rem;
+        }
+
+        /* =========================================== */
+        /* NAVIGATION */
+        /* =========================================== */
+        nav {
+            display: flex;
+            gap: 5px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-btn:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .nav-btn.active {
+            background-color: white;
+            color: #ff6b6b;
+            border-color: orange;
+        }
+
+        /* =========================================== */
+        /* MAIN CONTAINER */
+        /* =========================================== */
+        .container {
+            flex: 1;
+            padding: 30px 20px;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* =========================================== */
+        /* CARD STYLES */
+        /* =========================================== */
+        .card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            border: 2px solid #ffffff;
+        }
+
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* =========================================== */
+        /* FORM STYLES */
+        /* =========================================== */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #3498db;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #dce6f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background-color: #f8fbff;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+            transform: translateY(-1px);
+        }
+
+        /* =========================================== */
+        /* BUTTON STYLES */
+        /* =========================================== */
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        button.secondary {
+            background-color: #00afd2;
+        }
+
+        button.secondary:hover {
+            background-color: #00d5ff;
+        }
+
+        button.success {
+            background-color: #00828e;
+        }
+
+        button.success:hover {
+            background-color: #58d486;
+        }
+
+        button.danger {
+            background-color: #dc3545;
+        }
+
+        button.danger:hover {
+            background-color: #c82333;
+        }
+
+        /* =========================================== */
+        /* GOAL CARD */
+        /* =========================================== */
+        .goal-card {
+            border-radius: 10px;
+            padding: 25px;
+            background: linear-gradient(145deg, #ffffff, #f8fbff);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            border-left: 5px solid #00b520;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .goal-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .goal-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, #ff95d2, #ffa840, transparent);
+            border-radius: 0 0 0 50px;
+        }
+
+        .goal-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #0090d7;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .goal-description {
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+
+        .goal-amount {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #28a745;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* =========================================== */
+        /* PROGRESS BAR */
+        /* =========================================== */
+        .progress-container {
+            margin: 20px 0;
+        }
+
+        .progress-bar {
+            height: 20px;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 10px;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #009934, #68d09d);
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        /* =========================================== */
+        /* TRANSACTION LIST */
+        /* =========================================== */
+        .transaction-list {
+            margin-top: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #3498db;
+            border-radius: 8px;
+            padding: 10px;
+            background-color: #f8fbff;
+        }
+
+        .transaction-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #dce6f0;
+            transition: background-color 0.2s;
+        }
+
+        .transaction-item:last-child {
+            border-bottom: none;
+        }
+
+        .transaction-item:hover {
+            background-color: #e8f4fd;
+        }
+
+        .transaction-date {
+            color: #666;
+            font-size: 0.85rem;
+            margin-bottom: 5px;
+        }
+
+        .transaction-amount {
+            font-weight: 600;
+            color: #28a745;
+            font-size: 1.2rem;
+        }
+
+        .transaction-note {
+            font-size: 0.95rem;
+            color: #666;
+            margin-top: 3px;
+        }
+
+        /* =========================================== */
+        /* EMPTY STATE */
+        /* =========================================== */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: #3498db;
+            opacity: 0.8;
+        }
+
+        .empty-state h3 {
+            margin-bottom: 10px;
+            color: #2c3e50;
+            font-size: 1.5rem;
+        }
+
+        .empty-state p {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        /* =========================================== */
+        /* STATS CARDS */
+        /* =========================================== */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: linear-gradient(145deg, #ffffff, #f0f8ff);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+            border: 2px solid #aaf4ff;
+            transition: transform 0.3s;
+            text-align: center;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #3498db;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .stat-card:nth-child(1) .stat-value { color: #3498db; }
+        .stat-card:nth-child(2) .stat-value { color: #28a745; }
+        .stat-card:nth-child(3) .stat-value { color: #ff6b6b; }
+        .stat-card:nth-child(4) .stat-value { color: #ff9800; }
+
+        /* =========================================== */
+        /* MODAL */
+        /* =========================================== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .success-modal {
+            border: 3px solid #28a745;
+        }
+
+        /* =========================================== */
+        /* FOOTER */
+        /* =========================================== */
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #fff;
+            font-size: 0.9rem;
+            margin-top: 20px;
+            background-color: #f5ab00;
+            border-top: 2px solid #ffdc55;
+        }
+
+        /* =========================================== */
+        /* RESPONSIVE */
+        /* =========================================== */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .header-right {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+            }
+
+            nav {
+                width: 100%;
+                justify-content: space-between;
+                margin-top: 15px;
+            }
+
+            .nav-btn {
+                flex: 1;
+                justify-content: center;
+                padding: 10px 5px;
+                font-size: 0.85rem;
+            }
+
+            .dropdown-content {
+                min-width: 250px;
+                right: -10px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .container {
+                padding: 20px 15px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .dropdown-content {
+                min-width: 200px;
+            }
+        }
+
+        /* =========================================== */
+        /* ANIMATIONS */
+        /* =========================================== */
+        @keyframes successPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .success-pulse {
+            animation: successPulse 0.5s ease;
+        }
+
+        .goal-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .goal-actions button {
+            flex: 1;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -285,6 +967,474 @@
         <p>BetWin Pro &copy; 2026 | Track Smart · Bet Smart · Win Big</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        // ===========================================
+        // BETWIN PRO - COMPLETE JAVASCRIPT
+        // ===========================================
+
+        const STORAGE_KEYS = {
+            ALL_BETS: 'betwin_all_bets',
+            PROFIT_PLAN: 'betwin_profit_plan'
+        };
+
+        let currentSlip = [];
+        let allBets = [];
+        let currentTab = 'online';
+        let profitPlan = {
+            stake: 1000,
+            odds: 1.5,
+            targetProfit: 1000000,
+            daysNeeded: 0,
+            finalBalance: 0,
+            progressPercent: 0
+        };
+
+        function loadData() {
+            try {
+                const savedBets = localStorage.getItem(STORAGE_KEYS.ALL_BETS);
+                const savedPlan = localStorage.getItem(STORAGE_KEYS.PROFIT_PLAN);
+                if (savedBets) allBets = JSON.parse(savedBets);
+                if (savedPlan) profitPlan = JSON.parse(savedPlan);
+            } catch (error) {
+                console.error('Error loading data:', error);
+            }
+        }
+
+        function saveData() {
+            try {
+                localStorage.setItem(STORAGE_KEYS.ALL_BETS, JSON.stringify(allBets));
+                localStorage.setItem(STORAGE_KEYS.PROFIT_PLAN, JSON.stringify(profitPlan));
+            } catch (error) {
+                console.error('Error saving data:', error);
+            }
+        }
+
+        function formatTZS(amount) {
+            return 'Tzs. ' + Number(amount).toLocaleString('en-TZ', {
+                maximumFractionDigits: 0,
+                minimumFractionDigits: 0
+            });
+        }
+
+        function generateId() {
+            return Date.now().toString(36) + Math.random().toString(36).substr(2, 9);
+        }
+
+        function navigateToPage(pageName) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            
+            const pageMap = {
+                'dashboard': 'dashboard-page',
+                'calculator': 'calculator-page',
+                'betslip': 'betslip-page'
+            };
+            
+            const pageId = pageMap[pageName] || 'dashboard-page';
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) targetPage.classList.add('active');
+            
+            document.querySelectorAll('.nav-btn[data-page]').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('data-page') === pageName) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            const dropdown = document.getElementById('profile-dropdown');
+            if (dropdown) dropdown.classList.remove('show');
+            
+            refreshAllUI();
+        }
+
+        function switchBetTab(tab) {
+            currentTab = tab;
+            
+            ['online', 'won', 'lost'].forEach(t => {
+                const btn = document.getElementById('tab-' + t);
+                if (btn) btn.classList.remove('active');
+            });
+            
+            const activeBtn = document.getElementById('tab-' + tab);
+            if (activeBtn) activeBtn.classList.add('active');
+            
+            displayBets(tab);
+        }
+
+        function displayBets(status) {
+            const betsContainer = document.getElementById('bets-list');
+            const betsEmpty = document.getElementById('bets-empty');
+            
+            if (!betsContainer || !betsEmpty) return;
+            
+            const filteredBets = allBets.filter(bet => bet.status === status);
+            
+            if (filteredBets.length === 0) {
+                betsContainer.style.display = 'none';
+                betsEmpty.style.display = 'block';
+                return;
+            }
+            
+            betsContainer.style.display = 'block';
+            betsEmpty.style.display = 'none';
+            
+            betsContainer.innerHTML = filteredBets.map(bet => {
+                const matchDetails = bet.matches.map(m => `
+                    <div style="font-size: 0.85rem; margin: 3px 0;">
+                        <strong>${m.match}</strong> · ${m.league}<br>
+                        <span style="color: #3498db;">${m.option}</span> · Odds: ${m.odds}
+                    </div>
+                `).join('');
+                
+                const statusBadges = {
+                    'online': '<span style="background: #3498db; color: white; padding: 3px 12px; border-radius: 15px; font-size: 0.8rem;">📝 Online</span>',
+                    'won': '<span style="background: #28a745; color: white; padding: 3px 12px; border-radius: 15px; font-size: 0.8rem;">🏆 Won</span>',
+                    'lost': '<span style="background: #dc3545; color: white; padding: 3px 12px; border-radius: 15px; font-size: 0.8rem;">❌ Lost</span>'
+                };
+                
+                const actionButtons = bet.status === 'online' ? `
+                    <div style="margin-top: 5px; display: flex; gap: 5px;">
+                        <button class="success" style="padding: 5px 12px; font-size: 0.8rem;" onclick="updateBetStatus('${bet.id}', 'won')">
+                            🏆 Won
+                        </button>
+                        <button class="danger" style="padding: 5px 12px; font-size: 0.8rem;" onclick="updateBetStatus('${bet.id}', 'lost')">
+                            ❌ Lost
+                        </button>
+                    </div>
+                ` : '';
+                
+                return `
+                    <div class="transaction-item" style="flex-direction: column; align-items: flex-start; gap: 10px;">
+                        <div style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
+                            <span style="color: #666; font-size: 0.85rem;">
+                                ${new Date(bet.date).toLocaleString('en-TZ')}
+                            </span>
+                            ${statusBadges[bet.status] || ''}
+                        </div>
+                        <div style="width: 100%;">${matchDetails}</div>
+                        <div style="width: 100%; display: flex; justify-content: space-between; align-items: center; padding-top: 10px; border-top: 1px solid #eee;">
+                            <div>
+                                <span style="color: #666;">Total Odds: <strong>${bet.totalOdds.toFixed(2)}</strong></span><br>
+                                <span style="color: #666;">Stake: <strong>${formatTZS(bet.stake)}</strong></span>
+                            </div>
+                            <div style="text-align: right;">
+                                <span style="color: #28a745; font-weight: 700; font-size: 1.1rem;">
+                                    Potential: ${formatTZS(bet.potentialWin)}
+                                </span>
+                                ${actionButtons}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function updateBetStatus(betId, newStatus) {
+            const bet = allBets.find(b => b.id === betId);
+            if (bet) {
+                bet.status = newStatus;
+                if (newStatus === 'won') {
+                    bet.wonAmount = bet.potentialWin;
+                }
+                saveData();
+                refreshAllUI();
+                showMessage(`Bet marked as ${newStatus.toUpperCase()}! 🎉`);
+            }
+        }
+
+        function addMatchToSlip() {
+            const matchInput = document.getElementById('match-name');
+            const leagueInput = document.getElementById('match-league');
+            const optionSelect = document.getElementById('bet-option');
+            const oddsInput = document.getElementById('match-odds');
+            
+            const match = matchInput.value.trim();
+            const league = leagueInput.value.trim();
+            const option = optionSelect.value;
+            const odds = parseFloat(oddsInput.value);
+            
+            if (!match) return showMessage('Please enter match teams', false);
+            if (!league) return showMessage('Please enter league name', false);
+            if (!odds || odds <= 1.0) return showMessage('Please enter valid odds (greater than 1.0)', false);
+            
+            currentSlip.push({
+                id: generateId(),
+                match,
+                league,
+                option,
+                odds
+            });
+            
+            matchInput.value = '';
+            leagueInput.value = '';
+            oddsInput.value = '1.50';
+            
+            updateSlipUI();
+            showMessage('Match added to betslip! ⚽');
+        }
+
+        function updateSlipUI() {
+            const slipContainer = document.getElementById('current-slip-matches');
+            const slipEmpty = document.getElementById('slip-empty');
+            const matchCount = document.getElementById('match-count');
+            const totalOddsDisplay = document.getElementById('total-odds-display');
+            const potentialWin = document.getElementById('potential-win');
+            const stakeInput = document.getElementById('slip-stake');
+            
+            if (!slipContainer || !matchCount || !totalOddsDisplay || !potentialWin) return;
+            
+            const stake = parseFloat(stakeInput?.value) || 1000;
+            matchCount.textContent = `${currentSlip.length} Match${currentSlip.length !== 1 ? 'es' : ''}`;
+            
+            if (currentSlip.length === 0) {
+                if (slipEmpty) slipEmpty.style.display = 'block';
+                slipContainer.innerHTML = '';
+                totalOddsDisplay.textContent = '0.00';
+                potentialWin.textContent = formatTZS(0);
+                return;
+            }
+            
+            if (slipEmpty) slipEmpty.style.display = 'none';
+            
+            slipContainer.innerHTML = currentSlip.map(m => `
+                <div style="background: #f8fbff; padding: 12px; border-radius: 8px; margin-bottom: 8px; border-left: 4px solid #3498db; display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <strong>${m.match}</strong><br>
+                        <span style="font-size: 0.85rem; color: #666;">${m.league}</span><br>
+                        <span style="font-size: 0.85rem; color: #3498db;">${m.option}</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <span style="font-weight: 700; color: #28a745;">${m.odds.toFixed(2)}</span>
+                        <button class="danger" style="padding: 5px 10px; font-size: 0.75rem;" onclick="removeMatchFromSlip('${m.id}')" title="Remove match">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+            
+            const totalOdds = currentSlip.reduce((product, m) => product * m.odds, 1);
+            totalOddsDisplay.textContent = totalOdds.toFixed(2);
+            potentialWin.textContent = formatTZS(stake * totalOdds);
+        }
+
+        function removeMatchFromSlip(matchId) {
+            currentSlip = currentSlip.filter(m => m.id !== matchId);
+            updateSlipUI();
+        }
+
+        function clearCurrentSlip() {
+            if (currentSlip.length === 0) return;
+            currentSlip = [];
+            updateSlipUI();
+            showMessage('Betslip cleared!');
+        }
+
+        function placeBet() {
+            if (currentSlip.length === 0) {
+                return showMessage('Add at least one match to your slip', false);
+            }
+            
+            const stakeInput = document.getElementById('slip-stake');
+            const stake = parseFloat(stakeInput?.value) || 1000;
+            
+            if (stake < 100) {
+                return showMessage('Minimum stake is 100 TZS', false);
+            }
+            
+            const totalOdds = currentSlip.reduce((product, m) => product * m.odds, 1);
+            
+            const bet = {
+                id: generateId(),
+                matches: [...currentSlip],
+                totalOdds,
+                stake,
+                potentialWin: stake * totalOdds,
+                date: new Date().toISOString(),
+                status: 'online'
+            };
+            
+            allBets.push(bet);
+            currentSlip = [];
+            
+            saveData();
+            updateSlipUI();
+            refreshAllUI();
+            navigateToPage('dashboard');
+            showMessage(`Bet placed successfully! Potential win: ${formatTZS(bet.potentialWin)} 🎯`);
+        }
+
+        function calculateProfitPath() {
+            const stake = parseFloat(document.getElementById('stake-input')?.value) || 1000;
+            const odds = parseFloat(document.getElementById('odds-input')?.value) || 1.5;
+            const targetProfit = parseFloat(document.getElementById('target-input')?.value) || 1000000;
+            
+            if (odds <= 1.0) {
+                return showMessage('Odds must be greater than 1.0', false);
+            }
+            
+            let balance = stake;
+            let days = 0;
+            const MAX_DAYS = 10000;
+            
+            while ((balance - stake) < targetProfit && days < MAX_DAYS) {
+                balance *= odds;
+                days++;
+            }
+            
+            profitPlan = {
+                stake,
+                odds,
+                targetProfit,
+                daysNeeded: days >= MAX_DAYS ? Infinity : days,
+                finalBalance: balance,
+                progressPercent: days >= MAX_DAYS ? 0 : Math.min(100, ((balance - stake) / targetProfit) * 100)
+            };
+            
+            const resultDiv = document.getElementById('calc-result');
+            if (resultDiv) resultDiv.style.display = 'block';
+            
+            const daysDisplay = document.getElementById('calc-days');
+            const balanceDisplay = document.getElementById('calc-balance');
+            const progressFill = document.getElementById('calc-progress');
+            const profitText = document.getElementById('calc-profit-text');
+            const percentText = document.getElementById('calc-percent');
+            
+            if (profitPlan.daysNeeded === Infinity) {
+                if (daysDisplay) daysDisplay.textContent = 'Too Many Days';
+                if (balanceDisplay) balanceDisplay.textContent = 'Target unreachable';
+                if (progressFill) progressFill.style.width = '0%';
+                if (profitText) profitText.textContent = 'Adjust parameters';
+                if (percentText) percentText.textContent = 'N/A';
+            } else {
+                if (daysDisplay) daysDisplay.textContent = `${profitPlan.daysNeeded} Days`;
+                if (balanceDisplay) balanceDisplay.textContent = `Final: ${formatTZS(profitPlan.finalBalance)}`;
+                if (progressFill) progressFill.style.width = `${profitPlan.progressPercent}%`;
+                if (profitText) profitText.textContent = `Profit: ${formatTZS(profitPlan.finalBalance - stake)}`;
+                if (percentText) percentText.textContent = `${profitPlan.progressPercent.toFixed(1)}% of target`;
+            }
+            
+            saveData();
+        }
+
+        function updateDashboardStats() {
+            const online = allBets.filter(b => b.status === 'online').length;
+            const won = allBets.filter(b => b.status === 'won').length;
+            const lost = allBets.filter(b => b.status === 'lost').length;
+            
+            const totalProfit = allBets
+                .filter(b => b.status === 'won')
+                .reduce((sum, b) => sum + (b.wonAmount || b.potentialWin || 0) - (b.stake || 0), 0);
+            
+            const statOnline = document.getElementById('stat-online');
+            const statWon = document.getElementById('stat-won');
+            const statLost = document.getElementById('stat-lost');
+            const statTotalProfit = document.getElementById('stat-total-profit');
+            
+            if (statOnline) statOnline.textContent = online;
+            if (statWon) statWon.textContent = won;
+            if (statLost) statLost.textContent = lost;
+            if (statTotalProfit) statTotalProfit.textContent = formatTZS(totalProfit);
+        }
+
+        function refreshAllUI() {
+            updateDashboardStats();
+            displayBets(currentTab);
+            updateSlipUI();
+        }
+
+        function showMessage(msg, isSuccess = true) {
+            const modal = document.getElementById('success-modal');
+            const messageDiv = document.getElementById('success-message');
+            
+            if (modal && messageDiv) {
+                messageDiv.textContent = msg;
+                modal.style.display = 'flex';
+            }
+        }
+
+        function closeSuccessModal() {
+            const modal = document.getElementById('success-modal');
+            if (modal) modal.style.display = 'none';
+        }
+
+        function resetAllData() {
+            if (!confirm('Are you sure you want to reset ALL data? This action cannot be undone.')) {
+                return;
+            }
+            
+            allBets = [];
+            currentSlip = [];
+            profitPlan = {
+                stake: 1000,
+                odds: 1.5,
+                targetProfit: 1000000,
+                daysNeeded: 0,
+                finalBalance: 0,
+                progressPercent: 0
+            };
+            
+            localStorage.clear();
+            saveData();
+            refreshAllUI();
+            
+            const calcResult = document.getElementById('calc-result');
+            if (calcResult) calcResult.style.display = 'none';
+            
+            showMessage('All data has been reset successfully! 🔄');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadData();
+            
+            const stakeInput = document.getElementById('stake-input');
+            const oddsInput = document.getElementById('odds-input');
+            const targetInput = document.getElementById('target-input');
+            
+            if (stakeInput) stakeInput.value = profitPlan.stake;
+            if (oddsInput) oddsInput.value = profitPlan.odds;
+            if (targetInput) targetInput.value = profitPlan.targetProfit;
+            
+            const profileToggle = document.getElementById('profile-toggle');
+            const profileDropdown = document.getElementById('profile-dropdown');
+            
+            if (profileToggle && profileDropdown) {
+                profileToggle.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    profileDropdown.classList.toggle('show');
+                });
+                
+                document.addEventListener('click', (e) => {
+                    if (!profileToggle.contains(e.target) && !profileDropdown.contains(e.target)) {
+                        profileDropdown.classList.remove('show');
+                    }
+                });
+            }
+            
+            document.querySelectorAll('.nav-btn[data-page]').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    navigateToPage(this.getAttribute('data-page'));
+                });
+            });
+            
+            const slipStakeInput = document.getElementById('slip-stake');
+            if (slipStakeInput) {
+                slipStakeInput.addEventListener('input', updateSlipUI);
+            }
+            
+            const successModal = document.getElementById('success-modal');
+            if (successModal) {
+                successModal.addEventListener('click', function(e) {
+                    if (e.target === this) closeSuccessModal();
+                });
+            }
+            
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') closeSuccessModal();
+            });
+            
+            refreshAllUI();
+            
+            console.log('BetWin Pro initialized successfully! 🚀');
+        });
+    </script>
 </body>
-</html>
+                            </html>
