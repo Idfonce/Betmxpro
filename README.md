@@ -39,7 +39,7 @@ A complete betting tracker and profit calculator built with vanilla HTML, CSS, a
 
 ## 🚀 Live Demo
 
-Visit the live demo: [https://yourusername.github.io/betwin-pro](https://yourusername.github.io/betwin-pro)
+Visit the live demo: [Betmxpro](https://idfonce.github.io/Betmxpro/)
 
 ## 📦 Installation
 
